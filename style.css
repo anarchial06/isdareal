@@ -1,0 +1,331 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+header h1 {
+    font-size: 3rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #f0f0f0;
+    font-size: 1.2rem;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.games-section, .animation-section, .fun-facts {
+    margin-bottom: 3rem;
+}
+
+.games-section h2, .animation-section h2, .fun-facts h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-card, .animation-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover, .animation-card:hover {
+    transform: translateY(-5px);
+}
+
+.game-card h3, .animation-card h3 {
+    color: #667eea;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.color-game {
+    text-align: center;
+}
+
+.color-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.color-btn {
+    width: 60px;
+    height: 60px;
+    border: 3px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border-color: #333;
+    transform: scale(1.2);
+}
+
+.game-info {
+    margin-top: 1rem;
+}
+
+.game-info button {
+    background: #4ecdc4;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.game-info button:hover {
+    background: #45b7b8;
+    transform: translateY(-2px);
+}
+
+.sound-machine {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.sound-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sound-btn:hover {
+    transform: scale(1.05);
+}
+
+.sound-btn:active {
+    transform: scale(0.95);
+}
+
+#particleCanvas {
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    cursor: crosshair;
+    display: block;
+    margin: 0 auto;
+    background: white;
+}
+
+.bouncing-balls {
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+}
+
+.ball {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.ball-1 {
+    background: #ff6b6b;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.ball-2 {
+    background: #4ecdc4;
+    left: 50%;
+    animation-delay: 0.5s;
+}
+
+.ball-3 {
+    background: #ffd93d;
+    left: 80%;
+    animation-delay: 1s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-100px);
+    }
+}
+
+.rainbow-wave {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100px;
+    gap: 5px;
+}
+
+.wave-bar {
+    width: 20px;
+    background: linear-gradient(to top, #ff6b6b, #ffd93d, #95e77e, #4ecdc4, #667eea);
+    border-radius: 10px 10px 0 0;
+    animation: wave 1.5s infinite ease-in-out;
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0s; height: 60px; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; height: 80px; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; height: 70px; }
+.wave-bar:nth-child(4) { animation-delay: 0.3s; height: 90px; }
+.wave-bar:nth-child(5) { animation-delay: 0.4s; height: 75px; }
+
+@keyframes wave {
+    0%, 100% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0.5);
+    }
+}
+
+.fun-facts {
+    text-align: center;
+}
+
+.fact-display {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.fact-display p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    min-height: 50px;
+}
+
+.fact-display button {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.fact-display button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    margin-top: 3rem;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .color-buttons {
+        flex-wrap: wrap;
+    }
+    
+    .sound-machine {
+        grid-template-columns: 1fr;
+    }
+}
