@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hi lol</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+        
+        .doom {
+            color: rgb(0, 0, 0);
+            transition: all 0.3s;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: xx-large;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .doom:hover {
+            color: blue;
+            transition: all 0.3s;
+            font-size: x-large;
+            text-decoration: none;
+        }
+        .doom:hover a {
+            content: "dont click me";
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: url('background image.png') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        /* Add scrollable content */
+        .content-spacer {
+            height: 200vh;
+            position: absolute;
+            width: 100%;
+            pointer-events: none;
+        }
+        
+            </style>
+</head>
+<body>
+    <div class="content-spacer"></div>
+    <button><a href="https://www.youtube.com/watch?v=Z5BE3uRcz4A" target="_blank" class="doom">hi lol</a></button>
+    
+    <!-- Background Video -->
+    <video id="backgroundVideo" loop autoplay style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: -1; opacity: 0;">
+        <source src="song2.mp4" type="video/mp4">
+    </video>
+
+    <script>
+        // Aggressive autoplay - try everything immediately
+        const backgroundVideo = document.getElementById('backgroundVideo');
+        
+        // Try to play immediately on page load
+        function tryPlay() {
+            backgroundVideo.play().then(() => {
+                console.log('Background video playing!');
+                // Keep video at 100% transparency (opacity 0) initially
+                backgroundVideo.style.opacity = '0';
+                
+                // Since video loops, use timer-based fade-in after text cycling
+                setTimeout(() => {
+                    console.log('Text cycling complete, slowly fading in video...');
+                    // Slowly fade in over 3 seconds
+                    backgroundVideo.style.transition = 'opacity 3s ease-in';
+                    backgroundVideo.style.opacity = '0.9';
+                    console.log('Video fade-in started, opacity set to 0.9');
+                    
+                    // Hide masterpiece text when video comes in
+                    const button = document.querySelector('button a');
+                    if (button && button.textContent === 'ok shut up and enjoy this masterpiece') {
+                        button.style.opacity = '0';
+                        console.log('Masterpiece text hidden');
+                    }
+                }, 9000); // Wait for text cycling to complete
+                
+            }).catch(() => {
+                console.log('Autoplay blocked, retrying...');
+                setTimeout(tryPlay, 100);
+            });
+        }
+        
+        // Add image that fades in after 20 seconds
+        setTimeout(() => {
+            console.log('Adding image after 20 seconds...');
+            // Create image element
+            const fadeImage = document.createElement('img');
+            fadeImage.src = 'spongebob.jpg';
+            fadeImage.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 300px; max-height: 300px; z-index: 1001; transition: opacity 3s ease-in;';
+            fadeImage.style.opacity = '0';
+            document.body.appendChild(fadeImage);
+            
+            // Fade in image
+            setTimeout(() => {
+                fadeImage.style.opacity = '1';
+                console.log('Image faded in');
+                
+                // Move image right by 5cm over 5 seconds
+                let currentLeft = 50;
+                const moveInterval = setInterval(() => {
+                    currentLeft += 0.5; // Move right 0.5% every 100ms
+                    fadeImage.style.left = currentLeft + '%';
+                }, 100);
+                
+                // Stop moving after 5 seconds
+                setTimeout(() => {
+                    clearInterval(moveInterval);
+                    console.log('Image movement completed');
+                }, 8000);
+            }, 100);
+        }, 40000); // After 20 seconds
+        
+        // Start trying immediately
+        tryPlay();
+        
+        // Auto-click video to start playing and allow clicking any element
+        setTimeout(() => {
+            console.log('Auto-clicking to start video playback...');
+            // Click button to start video
+            const button = document.querySelector('button');
+            console.log('Button found:', button);
+            if (button) {
+                button.click();
+                console.log('Video started via button click');
+            } else {
+                console.log('Button not found, trying alternative method');
+                // Try clicking document body
+                document.click();
+                console.log('Document click attempted');
+            }
+            
+            // Allow clicking on any element after video starts
+            document.addEventListener('click', function(e) {
+                console.log('Screen clicked at:', e.target);
+                // Don't prevent default action - allow any interaction
+            }, { once: false });
+        }, 5000); // After 5 seconds for more time
+        
+        // Try on any possible user interaction
+        document.addEventListener('click', tryPlay, { once: true });
+        document.addEventListener('keydown', tryPlay, { once: true });
+        document.addEventListener('mousemove', tryPlay, { once: true });
+        document.addEventListener('scroll', tryPlay, { once: true });
+        document.addEventListener('touchstart', tryPlay, { once: true });
+        
+        // Create an invisible overlay to catch first interaction
+        const overlay = document.createElement('div');
+        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;cursor:pointer;';
+        document.body.appendChild(overlay);
+        
+        overlay.addEventListener('click', function() {
+            audio.play();
+            overlay.remove();
+        }, { once: true });
+        
+        // Continuous retry loop
+        setInterval(() => {
+            if (audio.paused) {
+                tryPlay();
+            }
+        }, 2000);
+        
+        // Fade transition function
+        function fadeText(fromText, toText, duration) {
+            const button = document.querySelector('button a');
+            button.style.transition = `opacity ${duration / 2}ms ease-in-out`;
+            
+            // Fade out
+            button.style.opacity = '0';
+            
+            // Change text and fade in
+            setTimeout(() => {
+                button.textContent = toText;
+                button.style.opacity = '1';
+            }, duration / 2);
+        }
+        
+        // Start the fade transition after page load
+        setTimeout(() => {
+            fadeText('hi lol', 'ok', 2000); // 2 second transition
+        }, 1000); // Start after 1 second
+        
+        // Second transition from ok to umm
+        setTimeout(() => {
+            fadeText('ok', 'umm', 2000); // 2 second transition
+        }, 4000); // Start after first transition completes (1s + 2s + 1s buffer)
+
+        // Second transition from ok to umm
+        setTimeout(() => {
+            fadeText('umm', 'ok shut up and enjoy this masterpiece', 2000); // 2 second transition
+        }, 7000); // Start after first transition completes (1s + 2s + 1s buffer)        
+        // Add click event to the button
+
+         // Second transition from ok to umm
+        setTimeout(() => {
+            fadeText('ok shut up and enjoy this masterpiece', '', 2000); // 2 second transition
+        }, 10000); // Start after first transition completes (1s + 2s + 1s buffer)    
+        // Add click event to the button
+        setTimeout(() => {
+            fadeText('', 'dis u r fo sho don lie😡', 2000); // 2 second transition
+        }, 40000);  
+        // Add click event to the button
+        setTimeout(() => {
+            fadeText('dis u r fo sho don lie😡', '', 2000); // 2 second transition
+        }, 50000);                  
+        // Add click event to the button
+        setTimeout(() => {
+            fadeText('', 'kuch ne kaha', 2000); // 2 second transition
+        }, 53000); // Start after first transition completes (1s + 2s + 1s buffer)        
+        // Add click event to the button
+        document.querySelector('button').addEventListener('click', function(e) {
+            e.preventDefault();
+            tryPlay(); // Try to play music
+        });
+        setTimeout(() => {
+            fadeText('kuch ne kaha','ye chaand h' , 1000); // 2 second transition
+        }, 55000); // Start after first transition completes (1s + 2s + 1s buffer)        
+        // Add click event to the button
+        document.querySelector('button').addEventListener('click', function(e) {
+            e.preventDefault();
+            tryPlay(); // Try to play music
+        });    
+        setTimeout(() => {
+            fadeText('ye chaand h','' , 1000); // 2 second transition
+        }, 57000); // Start after first transition completes (1s + 2s + 1s buffer)        
+        // Add click event to the button
+        document.querySelector('button').addEventListener('click', function(e) {
+            e.preventDefault();
+            tryPlay(); // Try to play music
+        });    
+                
+            </script>
+    
+</body>
+</html>
